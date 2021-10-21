@@ -1,0 +1,8 @@
+{
+  "name": "Quick Lang Switch",
+  "description": "Quickly switch keyboard language layout without showing the switcher popup.",
+  "uuid": "quick-lang-switch@ankostis.gmail.com",
+  "version": 1,
+  "shell-version": ["40", "41"],
+  "url": "https://github.com/ankostis/gnome-shell-quick-lang-switch"
+}
