@@ -19,7 +19,7 @@ logout and re-login (required for *Wayland*).
 
 ## Rational
 
-The language switcher popup by defaulttakes ~0.7sec delay for to appear,
+The language switcher popup by defaulttakes ~0.7sec to appear,
 meaning that roughly 2-4 strokes are lost till the switch completes.
 This affects heavily users typing languages with non-latin based alphabets
 (e.g. Greek, Cyrilic, Arabic, Japanese), particularly when writting technical documents.
