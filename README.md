@@ -3,6 +3,9 @@
 Gnome shell extension to quickly switch keyboard language layout,
 without waiting for the switcher popup to appear.
 
+> **TIP:** to facilitate typing while switching language, assign the _"Switch to next/previous input source"_ keyboard shortcut to a single keystroke,
+> like then **[SysRq/Print]** key.
+
 ## Install
 Install it from [Gnome-extensions site](https://extensions.gnome.org/extension/4559/quick-lang-switch/), or directly from GitHub with this command:
 ```bash
