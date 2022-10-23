@@ -48,12 +48,14 @@ as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/
 
 ## Packaging instructions
 
-Include the commit-id as a zip-comment (with `-z` option):
+1. Check the latest version present in the  *Gnome-extensions site* (link above).
+2. `git tag -sm '<msg>'  <latest-release + 1>`
+3. `git push origin main --tag`
+4. Archive extension & include the commit-id as a zip-comment (with `-z` option):
 
-```bash
-rm -f ../gnome-shell-quick-lang-switch.zip
-git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch.zip -z * 
-```
+   ```bash
+   git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z * 
+   ```
 
 
 ## Changes
