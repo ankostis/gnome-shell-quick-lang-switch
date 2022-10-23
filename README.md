@@ -46,6 +46,16 @@ A better solution would be to modify the [original `ui/status/keyboard.js` code]
 to skip the switcher-popup based on some new boolen preference (e.g. settable from `Tweaks` ),
 as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/2945) issue.
 
+## Packaging instructions
+
+Include the commit-id as a zip-comment (with `-z` option):
+
+```bash
+rm -f ../gnome-shell-quick-lang-switch.zip
+git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch.zip -z * 
+```
+
+
 ## Changes
 
 ### Version-6: <= gnome-43
