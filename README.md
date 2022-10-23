@@ -48,6 +48,22 @@ as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/
 
 ## Changes
 
+### Version-6: <= gnome-43
+
+version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43
+
+### Version-5: <= gnome-42
+
+version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42
+
+### Version-4: <= gnome-41
+
+version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41
+
+### Version-3: gnome-40 & 41
+
+version: 40, 41
+
 ### Version-1: re-bind `switch-input-source` shortcut to direct switch
 
 It re-binds the `'switch-input-source'` shortcut:
