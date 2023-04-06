@@ -49,16 +49,25 @@ as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/
 ## Packaging instructions
 
 1. Check the latest version present in the  *Gnome-extensions site* (link above).
-2. `git tag -sm '<msg>'  <latest-release + 1>`
-3. `git push origin main --tag`
-4. Archive extension & include the commit-id as a zip-comment (with `-z` option):
+2. Update [Changes](#Changes), below.
+3. `git tag -sm '<msg>'  <latest-release + 1>`
+4. `git push origin main --tag`
+5. Archive extension & include the commit-id as a zip-comment
+   (with the `-z` option to set a comment with the git-hash on the zip):
 
    ```bash
-   git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z * 
+   git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z *
    ```
 
+6. Upload it in https://extensions.gnome.org/upload/
 
 ## Changes
+
+### Version-7: <= gnome-44
+
+- version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43, 44
+- thanks to [Oleg Arefyev](https://github.com/imareo)'s
+  [PR#9](https://github.com/ankostis/gnome-shell-quick-lang-switch/pull/9).
 
 ### Version-6: <= gnome-43
 
