@@ -26,6 +26,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const { Gio, Meta, Shell } = imports.gi
 const Main = imports.ui.main;
 const SWITCH_SHORTCUT_NAME = 'switch-input-source'
+const SWITCH_SHORTCUT_NAME_BACKWARD = 'switch-input-source-backward'
 const InputSourceManager = imports.ui.status.keyboard.getInputSourceManager();
 
 class Extension {
@@ -40,12 +41,27 @@ class Extension {
                               Meta.KeyBindingFlags.NONE,
                               Shell.ActionMode.ALL,
                               this._quickSwitch);
+        Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD);
+        Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD,
+                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+                              Meta.KeyBindingFlags.NONE,
+                              Shell.ActionMode.ALL,
+                              this._quickSwitch);
     }
 
     disable() {
         log(`disabling extension '${Me.metadata.name}':  restoring language switcher popup.`);
+        // switching layout per keyboard shortcut specified in 'switch-input-source' key.
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
+                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+                              Meta.KeyBindingFlags.NONE,
+                              Shell.ActionMode.ALL,
+                              InputSourceManager._switchInputSource.bind(InputSourceManager));
+        
+        // switching layout per keyboard shortcut specified in 'switch-input-source-backward' key.
+        Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD);
+        Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
                               Meta.KeyBindingFlags.NONE,
                               Shell.ActionMode.ALL,
