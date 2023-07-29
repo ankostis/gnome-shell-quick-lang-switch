@@ -89,29 +89,47 @@ there is now (June 2023) [Osamu Aoki's extension](https://extensions.gnome.org/e
 
 ## Changes
 
-### Version-7: <= gnome-44
+### 31 Jul 2023, v8: cycle-backward, fix restoring switcher popup
 
-- version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43, 44
-- thanks to [Oleg Arefyev](https://github.com/imareo)'s
+* FEAT: bind also `switch-input-source-backward`
+  (fix [#4](https://github.com/ankostis/gnome-shell-quick-lang-switch/issues/4).
+  thanks to [Yevhen Popok](https://github.com/xalt7x), [@PotatoXPC](https://github.com/PotatoXPC))
+* FIX: previously, disabling the extension and reinstating the switcher popup
+  would brake repeated cycling, making it impossible to cycle further than 
+  the immediate next layout, not without first releasing keys and re-pressing them.
+  - FIX: this could possibly also fix [#5](https://github.com/ankostis/gnome-shell-quick-lang-switch/issues/5)
+    crashing when disabling the extensein (can't be sure, couldn't reproduce).
+* refact: refetch sourceManager on each cycie-call, in case it has changed
+  (instead of storing it in a global var on initialization).
+* doc: comments describe new method's provenance
+* doc: enhance README from user feedback & SO;  mention similar extension by Osamu Aoki,
+  better for multiple layouts.
+* DOC: add LICENSE file AGPL.
+* DOC: describe implementation provenance and challenges in comments.
+
+### 6 Apr 2023, v7: <= gnome-44
+
+* version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43, 44
+* thanks to [Oleg Arefyev](https://github.com/imareo)'s
   [PR#9](https://github.com/ankostis/gnome-shell-quick-lang-switch/pull/9).
 
-### Version-6: <= gnome-43
+### 23 Oct 2022, v6: <= gnome-43
 
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43
 
-### Version-5: <= gnome-42
+### 27 May 2022, v5: <= gnome-42
 
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42
 
-### Version-4: <= gnome-41
+### 2 Nov 2021, v4: <= gnome-41
 
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41
 
-### Version-3: gnome-40 & 41
+### 22 Oct 2021, v3: gnome-40 & 41
 
 version: 40, 41
 
-### Version-1: re-bind `switch-input-source` shortcut to direct switch
+### 21 Oct 2021, v1: re-bind `switch-input-source` shortcut to direct switch
 
 It re-binds the `'switch-input-source'` shortcut:
 
