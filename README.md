@@ -1,7 +1,7 @@
 # Gnome-shell: Quick language Switch extension
 
-Gnome shell extension to quickly switch keyboard language layout,
-without waiting for the switcher popup to appear.
+A *X11*/*Wayland* extension to quickly switch keyboard language layouts,
+that bypass the switcher popup and preserves the focus of the active window/widget.
 
 > **TIP:** to facilitate typing while switching language, assign the _"Switch to next/previous input source"_ keyboard shortcut to a single keystroke,
 > like then **[SysRq/Print]** key.
@@ -22,23 +22,34 @@ logout and re-login (required for *Wayland*).
 
 ## Rational
 
-The language switcher popup by defaulttakes ~0.7sec to appear,
+The language switcher popup by default takes ~0.7sec to appear,
 meaning that roughly 2-4 strokes are lost till the switch completes.
 This affects heavily users typing languages with non-latin based alphabets
 (e.g. Greek, Cyrilic, Arabic, Japanese), particularly when writting technical documents.
 
-Acording to the recipes below, to safely workaround this issue both on *X* and *Wayland*
-you could employe a "custom keyboard shortcut" to delegate to a bash-script
-performing the switch through *dbus*, which bypasses the popup:
+Furthermore, the popup messes with the focus of the active window/widget,
+(eg. IntelliJ's search popup gets closed, the active widget loses focus when
+the screen is shared, etc).
+
+Since `gsettings` cannot reliably switch keyboard layouts both on *X* and *Wayland*,
+some of the recipes below suggest binding a "custom keyboard shortcut" to a bash-script
+performing the switch through *dbus* command, which bypasses the popup:
 
 * https://askubuntu.com/questions/972926/how-to-not-show-keyboard-layout-chooser-popup-when-changing-language-in-gnome-3
 * https://itectec.com/unixlinux/how-to-change-keyboard-layout-in-gnome-3-from-command-line/
 * https://unix.stackexchange.com/a/449475/156357
 * https://askubuntu.com/a/1136485/251379
-
-Unfortunately, due to [security concerns](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3943),
-*dbus* can no longer call method  `org.gnome.Shell.Eval` with arbitrary code,
-since Gnome-shell v41 (e.g. pushed downstream to *Debian unstable "SID"* roughly on Sept 2021).
+* https://askubuntu.com/questions/1042845/disable-popup-notification-on-ubuntu-18-04-language-switch/1480203
+* https://askubuntu.com/questions/1123163/modeless-stateless-layout-language-switching-with-caps-lock-again-18-04-lts-bi
+* https://askubuntu.com/questions/969784/fast-switch-input-source-via-capslock-button-in-ubuntu-17-10
+* https://askubuntu.com/questions/1084049/switch-layouts-with-one-key-on-18-04-bug
+*
+Unfortunately since Gnome-shell v41 (e.g. pushed downstream to *Debian unstable "SID"* roughly on Sept 2021)
+*dbus* no longer allows calling method  `org.gnome.Shell.Eval` with arbitrary code,
+due to [security concerns](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3943).
+The workaround to keep using *dbus* is to [use a custom `eval` method](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
+but this extension cuts to the chase.
+.
 
 ## Improvements
 
@@ -46,10 +57,24 @@ A better solution would be to modify the [original `ui/status/keyboard.js` code]
 to skip the switcher-popup based on some new boolen preference (e.g. settable from `Tweaks` ),
 as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/2945) issue.
 
+If you want to [switch between **multiple layouts** immediately](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
+ie. without cycling through them,
+there is now (June 2023) [Osamu Aoki's extension](https://extensions.gnome.org/extension/6066/shortcuts-to-activate-input-methods/).
+
 ## Packaging instructions
 
+0. [Test the code](https://gjs.guide/extensions/development/creating.html#extension-js):
+   unfortunatly the nested gnome-shell cannot test the language switch key,
+  it's consumed by the outer shell - under *Wayland* (at least) you must re-login,
+  and check:
+  * Follow extension logs with `journalctl  -fg 'quick`.
+  * Cycle with 3+ layouts installed.
+  * Enable, disable, re-enable extension and check that both the switcher popup
+    and the immediate cycling work fine in each state.
+  * Check both **Xorg** and **Wayland**.
+
 1. Check the latest version present in the  *Gnome-extensions site* (link above).
-2. Update [Changes](#Changes), below.
+2. Populate the [Changes](#Changes), below, for the version+1.
 3. `git tag -sm '<msg>'  <latest-release + 1>`
 4. `git push origin main --tag`
 5. Archive extension & include the commit-id as a zip-comment
@@ -59,7 +84,8 @@ as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/
    git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z *
    ```
 
-6. Upload it in https://extensions.gnome.org/upload/
+6. Convert the tag into  a GitHub relase.
+7. Upload it in https://extensions.gnome.org/upload/
 
 ## Changes
 
