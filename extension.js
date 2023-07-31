@@ -30,6 +30,7 @@ const InputSourceManager = imports.ui.status.keyboard.getInputSourceManager();
 
 class Extension {
     constructor() {
+        _log(`INITIALIZING`);
     }
 
     enable() {
@@ -58,7 +59,6 @@ class Extension {
 }
 
 function init() {
-    _log(`INITIALIZING`);
     return new Extension();
 }
 
