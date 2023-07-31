@@ -36,7 +36,7 @@ class Extension {
     enable() {
         _log(`ENABLING, bypassing language switcher popup.`);
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
-        Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
+        InputSourceManager._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
                               Meta.KeyBindingFlags.NONE,
                               Shell.ActionMode.ALL,
@@ -46,7 +46,7 @@ class Extension {
     disable() {
         _log(`DISABLING, restoring language switcher popup.`);
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
-        Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
+        InputSourceManager._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
                               Meta.KeyBindingFlags.NONE,
                               Shell.ActionMode.ALL,
