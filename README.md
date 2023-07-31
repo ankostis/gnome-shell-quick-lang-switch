@@ -61,31 +61,39 @@ If you want to [switch between **multiple layouts** immediately](https://askubun
 ie. without cycling through them,
 there is now (June 2023) [Osamu Aoki's extension](https://extensions.gnome.org/extension/6066/shortcuts-to-activate-input-methods/).
 
-## Packaging instructions
+## Release instructions
 
-0. [Test the code](https://gjs.guide/extensions/development/creating.html#extension-js):
-   unfortunatly the nested gnome-shell cannot test the language switch key,
-  it's consumed by the outer shell - under *Wayland* (at least) you must re-login,
-  and check:
-  * Follow extension logs with `journalctl  -fg 'quick`.
-  * Cycle with 3+ layouts installed.
-  * Enable, disable, re-enable extension and check that both the switcher popup
-    and the immediate cycling work fine in each state.
-  * Check both **Xorg** and **Wayland**.
+0. Test the code:
+   * Follow the extension's logs with: `journalctl  -fg 'quick`.
+   * [Install the extension locally](https://gjs.guide/extensions/development/creating.html#extension-js):
+ 
+     ```bash
+     cd ~/.local/share/gnome-shell/extensions
+     ln -s <your-project-folder> quick-lang-switch@loca
+     ```
+   
+     > **Note:** Unfortunately testing the extension under *Wayland* in a nested gnome-shell,
+     > as _gnome-shell_ docs suggest, does not work for the language switch key,
+     > because it is consumed by the outer shell; you must re-login to reload your changes.
+   
+   * Cycle with 3+ layouts installed.
+   * Enable, disable, re-enable extension and check that both the switcher popup
+     and the immediate cycling work fine in each state.
+   * Check both **Xorg** and **Wayland**.
 
-1. Check the latest version present in the  *Gnome-extensions site* (link above).
-2. Populate the [Changes](#Changes), below, for the version+1.
+1. Discover the latest version present in the  *Gnome-extensions site* (link above).
+2. Populate the [Changes](#Changes) section, below, for the discovered `version + 1`.
 3. `git tag -sm '<msg>'  <latest-release + 1>`
 4. `git push origin main --tag`
-5. Archive extension & include the commit-id as a zip-comment
-   (with the `-z` option to set a comment with the git-hash on the zip):
+5. Archive the extension & include the commit-id as a zip-comment
+   (the `-z` option sets the git-hash as zip's comment):
 
    ```bash
    git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z *
    ```
 
-6. Convert the tag into  a GitHub relase.
-7. Upload it in https://extensions.gnome.org/upload/
+6. Upload it in https://extensions.gnome.org/upload/
+7. Convert the tag into a GitHub release and attach the archive as an asset.
 
 ## Changes
 
