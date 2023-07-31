@@ -33,7 +33,7 @@ class Extension {
     }
 
     enable() {
-        log(`enabling extension '${Me.metadata.name}':  bypassing language switcher popup.`);
+        _log(`ENABLING, bypassing language switcher popup.`);
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
@@ -43,7 +43,7 @@ class Extension {
     }
 
     disable() {
-        log(`disabling extension '${Me.metadata.name}':  restoring language switcher popup.`);
+        _log(`DISABLING, restoring language switcher popup.`);
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
@@ -58,6 +58,10 @@ class Extension {
 }
 
 function init() {
-    log(`initializing extension '${Me.metadata.name}'`);
+    _log(`INITIALIZING`);
     return new Extension();
+}
+
+function _log(...args) {
+    log(`extension '${Me.metadata.name}': ` + args.join("\n"));
 }
