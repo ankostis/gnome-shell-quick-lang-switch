@@ -79,38 +79,37 @@ class Extension {
     }
 
     /**
-     * Simplified array indexing logic of `InputSourceManager._modifiersSwitcher()`
-     * by assuming `_inputSources` indexed with conjecutive integers 
-     * (actually it is a dictionary with conjecutive stringified-integers as keys),
-     * added reverse cycling, and 
-     * stop returning any bool (was always true).
+     * Adapted from `InputSourceManager._modifiersSwitcher():
+     * - simplified array indexing logic by assuming`_inputSources` always indexed
+     *   with conjecutive integers without null gaps
+     *   (actually keys are sorted stringified ints like `{"1": ,..., "2": ...}`),
+     * - added reverse cycling,
+     * - stop returning any bool (was always true), and 
+     * - added warn/error logs.
      */
     _quickSwitchLayouts(display, window, binding) {
         const sources = this._inputSources;
         const nsources = Object.keys(sources).length;
-        if (nsources <= 1) {
-            warn(`Empty or singular inputSources list(x${nsources}) - doing nothing.`);
+        if (nsources === 0) {
+            warn(`Empty inputSources - doing nothing.`);
             KeyboardManager.releaseKeyboard();
             return;
         }
-        const cycleDirection = binding.is_reversed()? -1: 1;
-
-        let si = this._currentSource? this._currentSource.index: 0;
-        let n = 0;  // Counter to avoid infinite loop if array populated with nulls.
-        do {
-            // Always add modulo to avoid negatives, tip: ((-1 % 4) = -1) + 4 = 3
-            si = (si + cycleDirection + nsources) % nsources;
-            n++;
-        } while (!(sources[si]) && n < nsources);
-
+        const dir = binding.is_reversed()? -1: 1;
+        const ci = this._currentSource? this._currentSource.index: 0;
+        // Always add modulo to avoid negatives, tip: ((-1 % 4) = -1) + 4 = 3
+        const ni = (ci + dir + nsources) % nsources;
         const nextSource = sources[si];
+
         if (!nextSource) {
-            error(`Cycling ${cycleDirection}x${n} in ${nsources} inputSources(${JSON.stringify(sources)}) brought nothing.`);
+            error(
+                `Cycling ${cycleDirection} in ${nsources} inputSources(${JSON.stringify(sources)})`,
+                ` from ${ci}-->${ni} brought nothing.`);
             KeyboardManager.releaseKeyboard();
             return;
         }
         
-        nextSource.activate(true);
+       sources[ni].activate(true);
     }
 }
 
