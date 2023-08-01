@@ -45,18 +45,20 @@ class Extension {
         const sourceman = imports.ui.status.keyboard.getInputSourceManager();
 
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
-        sourceman._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
-                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
-                              Meta.KeyBindingFlags.NONE,
-                              Shell.ActionMode.ALL,
-                              this._quickSwitchLayouts.bind(sourceman));
+        sourceman._keybindingAction = Main.wm.addKeybinding(
+            SWITCH_SHORTCUT_NAME,
+            new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+            Meta.KeyBindingFlags.NONE,
+            Shell.ActionMode.ALL,
+            this._quickSwitchLayouts.bind(sourceman));
 
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD);
-        sourceman._keybindingActionBackward = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD,
-                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
-                              Meta.KeyBindingFlags.IS_REVERSED,
-                              Shell.ActionMode.ALL,
-                              this._quickSwitchLayouts.bind(sourceman));
+        sourceman._keybindingActionBackward = Main.wm.addKeybinding(
+            SWITCH_SHORTCUT_NAME_BACKWARD,
+            new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+            Meta.KeyBindingFlags.IS_REVERSED,
+            Shell.ActionMode.ALL,
+            this._quickSwitchLayouts.bind(sourceman));
     }
 
     disable() {
@@ -64,18 +66,20 @@ class Extension {
         const sourceman = imports.ui.status.keyboard.getInputSourceManager();
 
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
-        sourceman._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
-                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
-                              Meta.KeyBindingFlags.NONE,
-                              Shell.ActionMode.ALL,
-                              sourceman._switchInputSource.bind(sourceman));
-        
+        sourceman._keybindingAction = Main.wm.addKeybinding(
+            SWITCH_SHORTCUT_NAME,
+            new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+            Meta.KeyBindingFlags.NONE,
+            Shell.ActionMode.ALL,
+            sourceman._switchInputSource.bind(sourceman));
+
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD);
-        sourceman._keybindingActionBackward = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD,
-                              new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
-                              Meta.KeyBindingFlags.IS_REVERSED,
-                              Shell.ActionMode.ALL,
-                              sourceman._switchInputSource.bind(sourceman));
+        sourceman._keybindingActionBackward = Main.wm.addKeybinding(
+            SWITCH_SHORTCUT_NAME_BACKWARD,
+            new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
+            Meta.KeyBindingFlags.IS_REVERSED,
+            Shell.ActionMode.ALL,
+            sourceman._switchInputSource.bind(sourceman));
     }
 
     /**
@@ -95,8 +99,8 @@ class Extension {
             KeyboardManager.releaseKeyboard();
             return;
         }
-        const dir = binding.is_reversed()? -1: 1;
-        const ci = this._currentSource? this._currentSource.index: 0;
+        const dir = binding.is_reversed() ? -1 : 1;
+        const ci = this._currentSource ? this._currentSource.index : 0;
         // Always add modulo to avoid negatives, tip: ((-1 % 4) = -1) + 4 = 3
         const ni = (ci + dir + nsources) % nsources;
         const nextSource = sources[si];
@@ -108,8 +112,8 @@ class Extension {
             KeyboardManager.releaseKeyboard();
             return;
         }
-        
-       sources[ni].activate(true);
+
+        sources[ni].activate(true);
     }
 }
 
