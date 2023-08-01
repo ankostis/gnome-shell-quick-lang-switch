@@ -91,6 +91,7 @@ class Extension {
         if (nsources <= 1) {
             warn(`Empty or singular inputSources list(x${nsources}) - doing nothing.`);
             KeyboardManager.releaseKeyboard();
+            return;
         }
         const cycleDirection = binding.is_reversed()? -1: 1;
 
@@ -106,6 +107,7 @@ class Extension {
         if (!nextSource) {
             error(`Cycling ${cycleDirection}x${n} in ${nsources} inputSources(${JSON.stringify(sources)}) brought nothing.`);
             KeyboardManager.releaseKeyboard();
+            return;
         }
         
         nextSource.activate(true);
