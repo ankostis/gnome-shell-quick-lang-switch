@@ -37,18 +37,20 @@ const KeyboardManager = imports.misc.keyboardManager;
  */
 class Extension {
     constructor() {
-        _log(`INITIALIZING`);
+        log(`INITIALIZING`);
     }
 
     enable() {
-        _log(`ENABLING, bypassing language switcher popup.`);
+        log(`ENABLING, bypassing language switcher popup.`);
         const sourceman = imports.ui.status.keyboard.getInputSourceManager();
+
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         sourceman._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
                               Meta.KeyBindingFlags.NONE,
                               Shell.ActionMode.ALL,
                               this._quickSwitchLayouts.bind(sourceman));
+
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD);
         sourceman._keybindingActionBackward = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME_BACKWARD,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
@@ -58,8 +60,9 @@ class Extension {
     }
 
     disable() {
-        _log(`DISABLING, restoring language switcher popup.`);
+        log(`DISABLING, restoring language switcher popup.`);
         const sourceman = imports.ui.status.keyboard.getInputSourceManager();
+
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         sourceman._keybindingAction = Main.wm.addKeybinding(SWITCH_SHORTCUT_NAME,
                               new Gio.Settings({ schema_id: "org.gnome.desktop.wm.keybindings" }),
@@ -86,7 +89,7 @@ class Extension {
         const sources = this._inputSources;
         const nsources = Object.keys(sources).length;
         if (nsources <= 1) {
-            _log(`WARN: Empty or singular inputSources list(x${nsources}) - doing nothing.`);
+            warn(`Empty or singular inputSources list(x${nsources}) - doing nothing.`);
             KeyboardManager.releaseKeyboard();
         }
         const cycleDirection = binding.is_reversed()? -1: 1;
@@ -101,7 +104,7 @@ class Extension {
 
         const nextSource = sources[si];
         if (!nextSource) {
-            _log(`ERROR: cycle(${cycleDirection}x${n}) in x${nsources} inputSources(${JSON.stringify(sources)}) brought nothing.`);
+            error(`Cycling ${cycleDirection}x${n} in ${nsources} inputSources(${JSON.stringify(sources)}) brought nothing.`);
             KeyboardManager.releaseKeyboard();
         }
         
@@ -113,6 +116,18 @@ function init() {
     return new Extension();
 }
 
-function _log(...args) {
-    log(`extension '${Me.metadata.name}': ` + args.join("\n"));
+function _log(logfunc, ...args) {
+    logfunc(`${Me.metadata.uuid}:`, ...args);
+}
+
+function log(...args) {
+    _log(console.log, ...args);
+}
+
+function warn(...args) {
+    _log(console.warn, ...args);
+}
+
+function error(...args) {
+    _log(console.error, ...args);
 }
