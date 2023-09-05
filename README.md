@@ -3,9 +3,6 @@
 A *X11*/*Wayland* extension to quickly switch keyboard language layouts,
 that bypass the switcher popup and preserves the focus of the active window/widget.
 
-> **TIP:** to facilitate typing while switching language, assign the _"Switch to next/previous input source"_ keyboard shortcut to a single keystroke,
-> like then **[SysRq/Print]** key.
-
 ## Install
 Install it from [Gnome-extensions site](https://extensions.gnome.org/extension/4559/quick-lang-switch/), or directly from GitHub with this command:
 ```bash
@@ -31,25 +28,34 @@ Furthermore, the popup messes with the focus of the active window/widget,
 (eg. IntelliJ's search popup gets closed, the active widget loses focus when
 the screen is shared, etc).
 
-Since `gsettings` cannot reliably switch keyboard layouts both on *X* and *Wayland*,
-some of the recipes below suggest binding a "custom keyboard shortcut" to a bash-script
-performing the switch through *dbus* command, which bypasses the popup:
+Hence the many relevant questions on the web:
 
-* https://askubuntu.com/questions/972926/how-to-not-show-keyboard-layout-chooser-popup-when-changing-language-in-gnome-3
+* https://askubuntu.com/questions/972926/how-to-not-show-keyboard-layout-chooser-popup-when-changing-language-in-gnome-3/
 * https://itectec.com/unixlinux/how-to-change-keyboard-layout-in-gnome-3-from-command-line/
-* https://unix.stackexchange.com/a/449475/156357
-* https://askubuntu.com/a/1136485/251379
-* https://askubuntu.com/questions/1042845/disable-popup-notification-on-ubuntu-18-04-language-switch/1480203
-* https://askubuntu.com/questions/1123163/modeless-stateless-layout-language-switching-with-caps-lock-again-18-04-lts-bi
-* https://askubuntu.com/questions/969784/fast-switch-input-source-via-capslock-button-in-ubuntu-17-10
-* https://askubuntu.com/questions/1084049/switch-layouts-with-one-key-on-18-04-bug
-*
+* https://askubuntu.com/questions/1123163/modeless-stateless-layout-language-switching-with-caps-lock-again-18-04-lts-bi/
+* https://askubuntu.com/questions/969784/fast-switch-input-source-via-capslock-button-in-ubuntu-17-10/
+* https://askubuntu.com/questions/1084049/switch-layouts-with-one-key-on-18-04-bug/
+* https://askubuntu.com/questions/1200586/ubuntu-19-very-slow-f-keys-response-and-input-language-switch/
+* https://unix.stackexchange.com/questions/316998/how-to-change-keyboard-layout-in-gnome-3-from-command-line/
+* https://askubuntu.com/questions/209597/how-do-i-change-keyboards-from-the-command-line/
+* https://askubuntu.com/questions/1056802/how-to-assign-caps-lock-first-lang-and-shiftcaps-lock-second-lang-in-ubuntu/
+* https://askubuntu.com/questions/1134629/manipulate-the-default-shortcut-superspace-for-switching-to-next-input-source-w/
+* https://askubuntu.com/questions/998077/how-to-disable-the-keyboard-layouts-choosing-screen-in-gnome/
+* https://askubuntu.com/questions/1048805/how-can-i-switch-keyboard-source-quickly-in-ubuntu-18-04-gnome-shell/
+
+Since `gsettings` cannot reliably switch keyboard layouts both on *X* and *Wayland*,
+some of the recipes above suggest binding a "custom keyboard shortcut" to a bash-script
+performing the switch through *dbus* command, which bypasses the popup.
+
 Unfortunately since Gnome-shell v41 (e.g. pushed downstream to *Debian unstable "SID"* roughly on Sept 2021)
 *dbus* no longer allows calling method  `org.gnome.Shell.Eval` with arbitrary code,
 due to [security concerns](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3943).
 The workaround to keep using *dbus* is to [use a custom `eval` method](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
-but this extension cuts to the chase.
-.
+but this extension cuts to the chase. 
+
+Furthemore, since the extension does not define a *custom-shortcut*, 
+all keyboard customizations with `gnome-tweak-tool`/`setxkbmap` in X11 or *Wayland*
+still work fine, on all Gnome versions.
 
 ## Improvements
 
@@ -60,6 +66,11 @@ as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/
 If you want to [switch between **multiple layouts** immediately](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
 ie. without cycling through them,
 there is now (June 2023) [Osamu Aoki's extension](https://extensions.gnome.org/extension/6066/shortcuts-to-activate-input-methods/).
+
+**TIP:** to facilitate typing while switching language, you may assign 
+ the _"Switch to next/previous input source"_ keyboard shortcut to a single keystroke,
+like **[SysRq/Print]** or **[CapsLock]** keys.
+![Screenshot of Gnome Tweaks tool to enable **[CapsLock]** as language switcher](CapsLockSwitcherSettings.png)
 
 ## Release instructions
 
