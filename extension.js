@@ -20,14 +20,16 @@
 
 'use strict';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Gio from 'gi://Gio';
+import Shell from 'gi://Shell';
+import Meta from 'gi://Meta';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as KeyboardManager from 'resource:///org/gnome/shell/misc/keyboardManager.js';
+import { getInputSourceManager } from 'resource:///org/gnome/shell/ui/status/keyboard.js';
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
-const { Gio, Meta, Shell } = imports.gi
-const Main = imports.ui.main;
 const SWITCH_SHORTCUT_NAME = 'switch-input-source'
 const SWITCH_SHORTCUT_NAME_BACKWARD = 'switch-input-source-backward'
-const KeyboardManager = imports.misc.keyboardManager;
 
 /**
  * Code below written by adapting 
@@ -35,14 +37,10 @@ const KeyboardManager = imports.misc.keyboardManager;
  * and specifically the function `InputSourceManager._modifiersSwitcher()` 
  * which is hackishly called when screenshotting (ie. GrabHelper activated) .
  */
-class Extension {
-    constructor() {
-        log(`INITIALIZING`);
-    }
-
+export default class QuickLangSwitchExtension extends Extension {
     enable() {
-        log(`ENABLING, bypassing language switcher popup.`);
-        const sourceman = imports.ui.status.keyboard.getInputSourceManager();
+        this._info(`ENABLING, bypassing language switcher popup.`);
+        const sourceman = getInputSourceManager();
 
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         sourceman._keybindingAction = Main.wm.addKeybinding(
@@ -62,8 +60,8 @@ class Extension {
     }
 
     disable() {
-        log(`DISABLING, restoring language switcher popup.`);
-        const sourceman = imports.ui.status.keyboard.getInputSourceManager();
+        this._info(`DISABLING, restoring language switcher popup.`);
+        const sourceman = getInputSourceManager();
 
         Main.wm.removeKeybinding(SWITCH_SHORTCUT_NAME);
         sourceman._keybindingAction = Main.wm.addKeybinding(
@@ -95,7 +93,7 @@ class Extension {
         const sources = this._inputSources;
         const nsources = Object.keys(sources).length;
         if (nsources === 0) {
-            warn(`Empty inputSources - doing nothing.`);
+            this._warn(`Empty inputSources - doing nothing.`);
             KeyboardManager.releaseKeyboard();
             return;
         }
@@ -103,10 +101,10 @@ class Extension {
         const ci = this._currentSource ? this._currentSource.index : 0;
         // Always add modulo to avoid negatives, tip: ((-1 % 4) = -1) + 4 = 3
         const ni = (ci + dir + nsources) % nsources;
-        const nextSource = sources[si];
+        const nextSource = sources[ni];
 
         if (!nextSource) {
-            error(
+            this._error(
                 `Cycling ${cycleDirection} in ${nsources} inputSources(${JSON.stringify(sources)})`,
                 ` from ${ci}-->${ni} brought nothing.`);
             KeyboardManager.releaseKeyboard();
@@ -115,24 +113,20 @@ class Extension {
 
         sources[ni].activate(true);
     }
-}
 
-function init() {
-    return new Extension();
-}
+    _log(logfunc, ...args) {
+        logfunc(`${this.metadata.uuid}:`, ...args);
+    }
 
-function _log(logfunc, ...args) {
-    logfunc(`${Me.metadata.uuid}:`, ...args);
-}
+    _info(...args) {
+        this._log(console.log, ...args);
+    }
 
-function log(...args) {
-    _log(console.log, ...args);
-}
+    _warn(...args) {
+        this._log(console.warn, ...args);
+    }
 
-function warn(...args) {
-    _log(console.warn, ...args);
-}
-
-function error(...args) {
-    _log(console.error, ...args);
+    _error(...args) {
+        this._log(console.error, ...args);
+    }
 }
