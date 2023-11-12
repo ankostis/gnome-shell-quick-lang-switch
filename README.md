@@ -94,7 +94,7 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 1. Discover the latest version present in the  *Gnome-extensions site* (link above).
 2. Populate the [Changes](#Changes) section, below, for the discovered `version + 1`.
-3. `git tag -sm '<msg>'  <latest-release + 1>`
+3. `git tag -sm '<msg>'  v<latest-release + 1>`
 4. `git push origin main --tag`
 5. Archive the extension & include the commit-id as a zip-comment
    (the `-z` option sets the git-hash as zip's comment):
@@ -108,9 +108,25 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
    ```
 
 6. Upload it in https://extensions.gnome.org/upload/
-7. Convert the tag into a GitHub release and attach the archive as an asset.
+7. Convert the tag into a GitHub release, paste the changelog and attach archive as an asset.
 
 ## Changes
+
+### 12 Nov 2023, v9: ECMAScript-modules (ESM) for shell-v45
+
+**NOTE:** the new code is incompatible with previous gnome-shell-44 and below.
+In case bugs are discovered, old releases would have to be bugfixed separately.
+
+* FEAT/REFACT: revamp code for ESM modules, thanks to @hankjura (Yury thankjura).
+  * feat: old imports system wouldn't working on gnome-shell-45.
+  * refact: rename classname from `Extension` --> `QuickLangSwitchExtension`
+  * refact: use console.log/warn.error
+* refact: cycle layouts WITHOUT checking conjecutive nulls.
+  Maybe conjecutive null check was a relic from when their keys were non-ints
+  (if that era ever existed).
+* fix: had forgotten `return` in the 2 bail-out/error conditional branches,
+  indeterminate action would have happen then (not really tested :-().
+* doc: coallesce demand for this plugin in StackOverflow.
 
 ### 31 Jul 2023, v8: cycle-backward, fix restoring switcher popup
 
