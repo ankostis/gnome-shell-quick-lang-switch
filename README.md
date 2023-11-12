@@ -100,7 +100,11 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
    (the `-z` option sets the git-hash as zip's comment):
 
    ```bash
-   git rev-parse HEAD | zip ../gnome-shell-quick-lang-switch-$(git describe).zip -z *
+   git rev-parse HEAD | \
+       zip ../gnome-shell-quick-lang-switch-$(git describe).zip \
+       -z \
+       extension.js \
+       metadata.json
    ```
 
 6. Upload it in https://extensions.gnome.org/upload/
