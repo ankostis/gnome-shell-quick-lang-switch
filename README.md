@@ -112,6 +112,10 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 ## Changes
 
+### 15 Nov 2023, v10: gdm & lock-sreen
+
+* feat: mark `metadata.js` as working also in gdm & lock-sreen.
+
 ### 12 Nov 2023, v9: ECMAScript-modules (ESM) for shell-v45
 
 **NOTE:** the new code is incompatible with previous gnome-shell-44 and below.
