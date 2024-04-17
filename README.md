@@ -51,9 +51,9 @@ Unfortunately since Gnome-shell v41 (e.g. pushed downstream to *Debian unstable 
 *dbus* no longer allows calling method  `org.gnome.Shell.Eval` with arbitrary code,
 due to [security concerns](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3943).
 The workaround to keep using *dbus* is to [use a custom `eval` method](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
-but this extension cuts to the chase. 
+but this extension cuts to the chase.
 
-Furthemore, since the extension does not define a *custom-shortcut*, 
+Furthemore, since the extension does not define a *custom-shortcut*,
 all keyboard customizations with `gnome-tweak-tool`/`setxkbmap` in X11 or *Wayland*
 still work fine, on all Gnome versions.
 
@@ -67,7 +67,7 @@ If you want to [switch between **multiple layouts** immediately](https://askubun
 ie. without cycling through them,
 there is now (June 2023) [Osamu Aoki's extension](https://extensions.gnome.org/extension/6066/shortcuts-to-activate-input-methods/).
 
-**TIP:** to facilitate typing while switching language, you may assign 
+**TIP:** to facilitate typing while switching language, you may assign
  the _"Switch to next/previous input source"_ keyboard shortcut to a single keystroke,
 like **[SysRq/Print]** or **[CapsLock]** keys.
 ![Screenshot of Gnome Tweaks tool to enable **[CapsLock]** as language switcher](CapsLockSwitcherSettings.png)
@@ -77,16 +77,16 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 0. Test the code:
    * Follow the extension's logs with: `journalctl  -fg 'quick`.
    * [Install the extension locally](https://gjs.guide/extensions/development/creating.html#extension-js):
- 
+
      ```bash
      cd ~/.local/share/gnome-shell/extensions
      ln -s <your-project-folder> quick-lang-switch@loca
      ```
-   
+
      > **Note:** Unfortunately testing the extension under *Wayland* in a nested gnome-shell,
      > as _gnome-shell_ docs suggest, does not work for the language switch key,
      > because it is consumed by the outer shell; you must re-login to reload your changes.
-   
+
    * Cycle with 3+ layouts installed.
    * Enable, disable, re-enable extension and check that both the switcher popup
      and the immediate cycling work fine in each state.
@@ -112,9 +112,13 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 ## Changes
 
-### 15 Nov 2023, v10: gdm & lock-sreen
+
+### 15 Nov 2023, v10: gdm & lock-screen: REJECTED
 
 * feat: mark `metadata.js` as working also in gdm & lock-sreen.
+* [Rejected by Gnome-extensions site](https://extensions.gnome.org/review/48228),
+  because it `gdm` is not allowed on ego extensions since they are not going
+  to be installed as system extension.
 
 ### 12 Nov 2023, v9: ECMAScript-modules (ESM) for shell-v45
 
@@ -138,7 +142,7 @@ In case bugs are discovered, old releases would have to be bugfixed separately.
   (fix [#4](https://github.com/ankostis/gnome-shell-quick-lang-switch/issues/4).
   thanks to [Yevhen Popok](https://github.com/xalt7x), [@PotatoXPC](https://github.com/PotatoXPC))
 * FIX: previously, disabling the extension and reinstating the switcher popup
-  would brake repeated cycling, making it impossible to cycle further than 
+  would brake repeated cycling, making it impossible to cycle further than
   the immediate next layout, not without first releasing keys and re-pressing them.
   - FIX: this could possibly also fix [#5](https://github.com/ankostis/gnome-shell-quick-lang-switch/issues/5)
     crashing when disabling the extensein (can't be sure, couldn't reproduce).
