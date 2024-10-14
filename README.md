@@ -3,19 +3,52 @@
 A *X11*/*Wayland* extension to quickly switch keyboard language layouts,
 that bypass the switcher popup and preserves the focus of the active window/widget.
 
-## Install
-Install it from [Gnome-extensions site](https://extensions.gnome.org/extension/4559/quick-lang-switch/), or directly from GitHub with this command:
+Here’s a polished version of your installation instructions:
+
+---
+
+## Installation
+
+### Quick Install
+
+The easiest way to install the extension is through the [GNOME Extensions website](https://extensions.gnome.org/extension/4559/quick-lang-switch/).
+
+### Manual Installation
+
+If you prefer to install directly from GitHub, you can use the following command:
+
 ```bash
 git clone https://github.com/ankostis/gnome-shell-quick-lang-switch ~/.local/share/gnome-shell/extensions/quick-lang-switch@ankostis.gmail.com
 ```
 
-and then ensure it is enabled:
+Sometimes, the developer may be unavailable, and a new GNOME version may be released. In such cases, you may need to follow the manual installation steps and make some adjustments.
+
+### Additional Changes
+
+This version is compatible with GNOME versions 45-47. If a new version is released, you will need to update the `metadata.json` file to include the new version number. For example, if the next version is 48, modify the file as follows:
+
+```bash
+nano ~/.local/share/gnome-shell/extensions/quick-lang-switch@ankostis.gmail.com/metadata.json
+```
+
+Add a comma after "47" and include "48":
+
+```json
+"shell-version": ["46", "47", "48"],
+```
+
+### Enabling the Extension
+
+After installation, ensure the extension is enabled by running:
+
 ```bash
 gnome-extensions info quick-lang-switch@ankostis.gmail.com
 gnome-extensions enable quick-lang-switch@ankostis.gmail.com
 ```
-If the 1st command above reports that extension does not exist,
-logout and re-login (required for *Wayland*).
+
+If the first command indicates that the extension does not exist, please log out and log back in (this is required for Wayland).
+
+--- 
 
 ## Rational
 
@@ -112,6 +145,7 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 ## Changes
 
+### 14 Oct 2024, v12: +shell-v47
 
 ### 17 Apr 2024, v11: +shell-v46
 
