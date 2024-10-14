@@ -3,19 +3,47 @@
 A *X11*/*Wayland* extension to quickly switch keyboard language layouts,
 that bypass the switcher popup and preserves the focus of the active window/widget.
 
-## Install
-Install it from [Gnome-extensions site](https://extensions.gnome.org/extension/4559/quick-lang-switch/), or directly from GitHub with this command:
+Here’s a polished version of your installation instructions:
+
+## Installation
+
+### Quick Install
+
+The easiest way to install the extension is through the [GNOME Extensions website](https://extensions.gnome.org/extension/4559/quick-lang-switch/).
+
+### Manual Installation
+
+If you prefer to install directly from GitHub, you can use the following command:
+
 ```bash
 git clone https://github.com/ankostis/gnome-shell-quick-lang-switch ~/.local/share/gnome-shell/extensions/quick-lang-switch@ankostis.gmail.com
 ```
 
-and then ensure it is enabled:
+### Bump Gnome-version compatibility locally
+
+In case a new _Gnome_ version is released and the developer is unresponsive, you will need to update **your** `metadata.json` file to include the new version number. For example, if the new Gnome version is _48_, modify this JSON file as follows:
+
+```bash
+nano ~/.local/share/gnome-shell/extensions/quick-lang-switch@ankostis.gmail.com/metadata.json
+```
+
+... and append your _Gnome_'s version into the `"shell-version"` property:
+
+
+```json
+"shell-version": ["46", "47", "48"],
+```
+
+### Enabling the Extension
+
+After installation, ensure the extension is enabled by running:
+
 ```bash
 gnome-extensions info quick-lang-switch@ankostis.gmail.com
 gnome-extensions enable quick-lang-switch@ankostis.gmail.com
 ```
-If the 1st command above reports that extension does not exist,
-logout and re-login (required for *Wayland*).
+
+If the first command indicates that the extension does not exist, please log out and log back in (this is required for _Wayland_).
 
 ## Rational
 
@@ -60,7 +88,7 @@ still work fine, on all Gnome versions.
 ## Improvements
 
 A better solution would be to modify the [original `ui/status/keyboard.js` code](https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/status/keyboard.js#L407-410)
-to skip the switcher-popup based on some new boolen preference (e.g. settable from `Tweaks` ),
+to skip the switcher-popup based on some new boolean preference (e.g. settable from `Tweaks` ),
 as requested by [gnome-shell#2945](https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/2945) issue.
 
 If you want to [switch between **multiple layouts** immediately](https://askubuntu.com/questions/1406542/shortcuts-for-keyboard-layout-ubuntu-22-04/1428946#1428946),
@@ -113,7 +141,6 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ----
 
 ## Changes
-
 
 ### 22 Sep 2025, v16: +shell-v49
 
