@@ -113,6 +113,8 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ## Changes
 
 
+### 8 Dec 2024, v11: +shell-v47
+
 ### 17 Apr 2024, v11: +shell-v46
 
 ### 15 Nov 2023, v10: gdm & lock-screen: REJECTED
