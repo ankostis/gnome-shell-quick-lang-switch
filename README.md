@@ -113,7 +113,9 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ## Changes
 
 
-### 8 Dec 2024, v11: +shell-v47
+### 11 Feb 2024, v13: +shell-v48
+
+### 8 Dec 2024, v12: +shell-v47
 
 ### 17 Apr 2024, v11: +shell-v46
 
