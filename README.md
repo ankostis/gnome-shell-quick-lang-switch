@@ -113,7 +113,11 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ## Changes
 
 
-### 11 Feb 2024, v13: +shell-v48
+### 12 Feb 2024, v14: fix #22
+
+### 11 Feb 2024, v13: +shell-v48 BROKEN (#22)
+
+- Was it `event` argument added by #21?
 
 ### 8 Dec 2024, v12: +shell-v47
 
