@@ -113,11 +113,15 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ## Changes
 
 
-### 12 Feb 2024, v14: fix #22
+### 12 Feb 2024, v15: fix compatibility also <= v47 (#23, thankjura).
+
+### 12 Feb 2024, v14:  BROKEN again, but for v48 shell.
+
+- Removed the `event` arg (so broken for v48 shell).
 
 ### 11 Feb 2024, v13: +shell-v48 BROKEN (#22)
 
-- Was it `event` argument added by #21?
+- #21 [added the new `event` argument into `/ui/status/keyboard.js/InputSourceManager._switchInputSource()`](https://gjs.guide/extensions/upgrading/gnome-shell-48.html#inputsourcemanager) which broke old compatibility.
 
 ### 8 Dec 2024, v12: +shell-v47
 
