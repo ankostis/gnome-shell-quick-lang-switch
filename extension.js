@@ -89,7 +89,9 @@ export default class QuickLangSwitchExtension extends Extension {
      * - stop returning any bool (was always true), and 
      * - added warn/error logs.
      */
-    _quickSwitchLayouts(display, window, binding) {
+    _quickSwitchLayouts(...args) {
+        /* shell-v48 added `event` argument. */
+        const binding = args[args.length-1];
         const sources = this._inputSources;
         const nsources = Object.keys(sources).length;
         if (nsources === 0) {
