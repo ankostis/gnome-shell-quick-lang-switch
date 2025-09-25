@@ -110,16 +110,18 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 6. Upload it in https://extensions.gnome.org/upload/
 7. Convert the tag into a GitHub release, paste the changelog and attach archive as an asset.
 
+----
+
 ## Changes
 
 
-### 12 Feb 2024, v15: fix compatibility also <= v47 (#23, thankjura).
+### 12 Feb 2025, v15: fix compatibility also <= v47 (#23, @thankjura).
 
-### 12 Feb 2024, v14:  BROKEN again, but for v48 shell.
+### 12 Feb 2025, v14:  BROKEN again, but for v48 shell.
 
 - Removed the `event` arg (so broken for v48 shell).
 
-### 11 Feb 2024, v13: +shell-v48 BROKEN (#22)
+### 11 Feb 2025, v13: +shell-v48 BROKEN (#22)
 
 - #21 [added the new `event` argument into `/ui/status/keyboard.js/InputSourceManager._switchInputSource()`](https://gjs.guide/extensions/upgrading/gnome-shell-48.html#inputsourcemanager) which broke old compatibility.
 
