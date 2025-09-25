@@ -115,6 +115,10 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ## Changes
 
 
+### 22 Sep 2025, v16: +shell-v49
+
+- Reported as compatible by #49 (@jager1win).
+
 ### 12 Feb 2025, v15: fix compatibility also <= v47 (#23, @thankjura).
 
 ### 12 Feb 2025, v14:  BROKEN again, but for v48 shell.
