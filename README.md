@@ -142,9 +142,13 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 ## Changes
 
+### 15 May 2025, v17: +shell-v50
+
+- Reported as compatible by @Dce76325 (#27).
+
 ### 22 Sep 2025, v16: +shell-v49
 
-- Reported as compatible by #49 (@jager1win).
+- Reported as compatible by @jager1win (#49).
 
 ### 12 Feb 2025, v15: fix compatibility also <= v47 (#23, @thankjura).
 
