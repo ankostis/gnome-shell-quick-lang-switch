@@ -142,23 +142,22 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
 ## Changes
 
-### 15 May 2025, v17: +shell-v50
+### 4 Nov 2026, v18: +shell-v51
+- Reported as compatible by @VodoGamer (#29).
 
+### 15 May 2026, v17: +shell-v50
 - Reported as compatible by @Dce76325 (#27).
 
 ### 22 Sep 2025, v16: +shell-v49
-
 - Reported as compatible by @jager1win (#49).
 - Improve installation & testing instructions.
 
 ### 12 Feb 2025, v15: fix compatibility also <= v47 (#23, @thankjura).
 
 ### 12 Feb 2025, v14:  BROKEN again, but for v48 shell.
-
 - Removed the `event` arg (so broken for v48 shell).
 
 ### 11 Feb 2025, v13: +shell-v48 BROKEN (#22)
-
 - #21 [added the new `event` argument into `/ui/status/keyboard.js/InputSourceManager._switchInputSource()`](https://gjs.guide/extensions/upgrading/gnome-shell-48.html#inputsourcemanager) which broke old compatibility.
 
 ### 8 Dec 2024, v12: +shell-v47
@@ -166,14 +165,12 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 ### 17 Apr 2024, v11: +shell-v46
 
 ### 15 Nov 2023, v10: gdm & lock-screen: REJECTED
-
 * feat: mark `metadata.js` as working also in gdm & lock-sreen.
 * [Rejected by Gnome-extensions site](https://extensions.gnome.org/review/48228),
   because it `gdm` is not allowed on ego extensions since they are not going
   to be installed as system extension.
 
 ### 12 Nov 2023, v9: ECMAScript-modules (ESM) for shell-v45
-
 **NOTE:** the new code is incompatible with previous gnome-shell-44 and below.
 In case bugs are discovered, old releases would have to be bugfixed separately.
 
@@ -189,7 +186,6 @@ In case bugs are discovered, old releases would have to be bugfixed separately.
 * doc: coallesce demand for this plugin in StackOverflow.
 
 ### 31 Jul 2023, v8: cycle-backward, fix restoring switcher popup
-
 * FEAT: bind also `switch-input-source-backward`
   (fix [#4](https://github.com/ankostis/gnome-shell-quick-lang-switch/issues/4).
   thanks to [Yevhen Popok](https://github.com/xalt7x), [@PotatoXPC](https://github.com/PotatoXPC))
@@ -207,29 +203,23 @@ In case bugs are discovered, old releases would have to be bugfixed separately.
 * DOC: describe implementation provenance and challenges in comments.
 
 ### 6 Apr 2023, v7: <= gnome-44
-
 * version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43, 44
 * thanks to [Oleg Arefyev](https://github.com/imareo)'s
   [PR#9](https://github.com/ankostis/gnome-shell-quick-lang-switch/pull/9).
 
 ### 23 Oct 2022, v6: <= gnome-43
-
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42, 43
 
 ### 27 May 2022, v5: <= gnome-42
-
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41, 42
 
 ### 2 Nov 2021, v4: <= gnome-41
-
 version: 3.28, 3.30, 3.34, 3.32, 3.36, 3.38, 40, 41
 
 ### 22 Oct 2021, v3: gnome-40 & 41
-
 version: 40, 41
 
 ### 21 Oct 2021, v1: re-bind `switch-input-source` shortcut to direct switch
-
 It re-binds the `'switch-input-source'` shortcut:
 
 * when enabled, the shortcut delegates to the direct-switching method `InputSourceManager._modifiersSwitcher`, and
