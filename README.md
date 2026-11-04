@@ -1,3 +1,5 @@
+
+
 # Gnome-shell: Quick language Switch extension
 
 A *X11*/*Wayland* extension to quickly switch keyboard language layouts,
@@ -108,7 +110,7 @@ like **[SysRq/Print]** or **[CapsLock]** keys.
 
      ```bash
      cd ~/.local/share/gnome-shell/extensions
-     ln -s <your-project-folder> quick-lang-switch@loca
+     ln -s <your-project-folder> quick-lang-switch@ankostis.gmail.com
      ```
 
      > **Note:** Unfortunately testing the extension under *Wayland* in a nested gnome-shell,
